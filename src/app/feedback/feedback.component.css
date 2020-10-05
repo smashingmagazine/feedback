@@ -1,0 +1,48 @@
+#options {
+    display: flex;
+    justify-content: space-around;
+}
+
+#options label {
+    margin: 0;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin: .5rem 0 .5rem 0;
+}
+
+label {
+    margin: .5rem 0 .5rem 0;
+}
+
+.nameInput {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    color: white;
+    background-color: black;
+    font-size: large;
+    padding: .5rem;
+    border-radius: .5rem;
+    margin-top: 1rem;
+}
+
+#ratingLabel {
+    display: flex;
+    justify-content: space-between;
+    margin: .5rem 0 .5rem 0;
+}
+
+#ratingValue {
+    font-weight: bolder;
+    font-size: large;
+    border: .1rem solid lightgray;
+    padding: .4rem .6rem .1rem .6rem;
+    margin: 0;
+    vertical-align: middle;
+    border-radius: .3rem;
+}

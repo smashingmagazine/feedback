@@ -1,0 +1,57 @@
+<div id="container">
+    <h1>Feedback Form</h1>
+    <hr>
+    <p>We'd like your feedback to improve our website.</p>
+    <form [formGroup]="feedbackForm" data-netlify="true" method="post" (ngSubmit)="onSubmit()">
+        <div id="options">
+            <input type="radio" id="suggestion" name="gender" value="suggestion">
+            <label for="suggestion">Suggestion</label><br>
+            <input type="radio" id="comment" name="gender" value="comment">
+            <label for="comment">Comment</label><br>
+            <input type="radio" id="question" name="gender" value="question">
+            <label for="question">Question</label><br>
+        </div>
+        <div class="inputContainer">
+            <label>Description:</label>
+            <textarea rows="6"></textarea>
+        </div>
+        <div class="inputContainer">
+            <div id="ratingLabel">
+                <label>How would you rate our site?</label>
+                <label id="ratingValue">5</label>
+            </div>
+            <input type="range" name="rating" max="5">
+        </div>
+        <div class="inputContainer">
+            <label>Name:</label>
+            <div class="nameInput">
+                <input type="text" name="first-name" placeholder="First">
+                <input type="text" name="last-name" placeholder="Last">
+            </div>
+        </div>
+        <div class="inputContainer">
+            <label>Email:</label>
+            <input type="email" name="email">
+        </div>
+        <div class="inputContainer">
+            <button>Submit Feedback</button>
+        </div>
+
+        <!-- <input type="hidden" name="form-name" value="feedbackForm" />
+        <p>
+            <label>
+                Email:
+                <input type="email" name="email" formControlName="email">
+            </label>
+        </p>
+        <p>
+            <label>
+                Screenshot:
+                <input type="file" name="screenshot" formControlName="screenshot" (change)="onFileChange($event)">
+            </label>
+        </p>
+        <p>
+            <button type="submit">Send</button>
+        </p> -->
+    </form>
+</div>
