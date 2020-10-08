@@ -1,10 +1,14 @@
 #options {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
 }
 
 #options label {
-    margin: 0;
+    margin: 0 0 0 .2rem;
+}
+
+.radioOption {
+    margin: 0 0 .2rem 0;
 }
 
 .inputContainer {
@@ -19,16 +23,13 @@ label {
 
 .nameInput {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
-button {
-    color: white;
-    background-color: black;
-    font-size: large;
-    padding: .5rem;
-    border-radius: .5rem;
-    margin-top: 1rem;
+button:disabled {
+    cursor: not-allowed;
+    pointer-events: all;
+    background-color: slategrey;
 }
 
 #ratingLabel {
@@ -45,4 +46,49 @@ button {
     margin: 0;
     vertical-align: middle;
     border-radius: .3rem;
+}
+
+.error {
+    color: darkred;
+    background-color: lightsalmon;
+    border: .1rem solid crimson;
+    border-radius: .3rem;
+    padding: .5rem;
+    text-align: center;
+    margin: 0 0 1rem 0;
+    display: flex;
+    width: inherit;
+}
+
+.error p {
+    margin: 0;
+    flex-grow: 1;
+}
+
+textarea, input {
+    margin: .1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 5px;
+    font-size: medium;
+    font-weight: lighter;
+}
+
+.close {
+    cursor: default;
+}
+
+.hidden {
+    display: none;
+}
+
+@media screen and (min-width: 480px) {
+    #options {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .nameInput {
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
