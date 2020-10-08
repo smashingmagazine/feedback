@@ -8,6 +8,14 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+  <form name="feedbackForm" netlify netlify-honeypot="bot-field" action="/success" hidden>
+    <input type="text" name="firstName"/>
+    <input type="text" name="lastName"/>
+    <input type="text" name="email"/>
+    <input type="text" name="type"/>
+    <input type="text" name="description"/>
+    <input type="text" name="rating"/>
+  </form>
   <app-root></app-root>
 </body>
 </html>
