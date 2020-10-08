@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NetlifyFormsService } from '../netlify-forms/netlify-forms.service';
 
 @Component({
   selector: 'app-feedback',
@@ -8,59 +9,36 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent {
-  feedbackForm = new FormGroup({
-    email: new FormControl(''),
-    screenshot: new FormControl('')
+  feedbackForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', [Validators.email, Validators.required]],
+    type: ['', Validators.required],
+    description: ['', Validators.required],
+    rating: [0, Validators.min(1)]
   });
 
-  private screenshotSource;
+  errorMsg = '';
 
   constructor(
-    private http: HttpClient,
-    private cd: ChangeDetectorRef
+    private fb: FormBuilder,
+    private router: Router,
+    private netlifyForms: NetlifyFormsService,
   ) { }
 
-  onFileChange(event){
-    if(event.target.files.length > 0){
-      this.screenshotSource = (window.URL || window.webkitURL).createObjectURL(event.target.files[0]);
-      // const reader = new FileReader();
-      // reader.readAsDataURL(event.target.files[0]);
-      
-      // reader.onload = () => {
-      //   this.screenshotSource = reader.result;
-      // };
-
-      // this.cd.markForCheck();
-    }
-  }
-
   onSubmit() {
-    const body = new HttpParams()
-      .set('form-name', 'feedbackForm')
-      .append('email', this.feedbackForm.value.email)
-      .append('screenshot', this.screenshotSource);
-
-    this.http.post('/', body.toString(), { headers: { 'Content-Type': 'multipart/form-data' } }).subscribe(
-      res => { },
+    this.netlifyForms.submitEntry(this.feedbackForm.value).subscribe(
+      () => {
+        this.feedbackForm.reset();
+        this.router.navigateByUrl('/success');
+      },
       err => {
-        if (err instanceof ErrorEvent) {
-          //client side error
-          alert("Something went wrong when sending your message.");
-          console.log(err.error.message);
-        } else {
-          //backend error. If status is 200, then the message successfully sent
-          if (err.status === 200) {
-            alert("Your message has been sent!");
-          } else {
-            alert("Something went wrong when sending your message.");
-            console.log('Error status:');
-            console.log(err.status);
-            console.log('Error body:');
-            console.log(err.error);
-          }
-        }
+        this.errorMsg = err;
       }
     );
-  
+  }
+
+  closeError() {
+    this.errorMsg = '';
   }
 }
