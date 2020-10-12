@@ -11,9 +11,9 @@ export class NetlifyFormsService {
 
   constructor(private http: HttpClient) { }
 
-  submitEntry(fbEntry: Feedback): Observable<string> {
-    const body = new HttpParams()
-      .set('form-name', 'feedbackForm')
+  submitFeedback(fbEntry: Feedback): Observable<string> {
+    const entry = new HttpParams()
+      .set('form-name', 'feebackForm')
       .append('firstName', fbEntry.firstName)
       .append('lastName', fbEntry.lastName)
       .append('email', fbEntry.email)
@@ -21,9 +21,13 @@ export class NetlifyFormsService {
       .append('description', fbEntry.description)
       .append('rating', fbEntry.rating.toString());
 
+    return this.submitEntry(entry);
+  }
+
+  private submitEntry(entry: HttpParams): Observable<string> {
     return this.http.post(
       '/',
-      body.toString(),
+      entry.toString(),
       {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         responseType: 'text'

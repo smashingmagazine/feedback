@@ -27,7 +27,7 @@ export class FeedbackComponent {
   ) { }
 
   onSubmit() {
-    this.netlifyForms.submitEntry(this.feedbackForm.value).subscribe(
+    this.netlifyForms.submitFeedback(this.feedbackForm.value).subscribe(
       () => {
         this.feedbackForm.reset();
         this.router.navigateByUrl('/success');
