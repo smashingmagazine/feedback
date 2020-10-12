@@ -12,14 +12,15 @@ export class NetlifyFormsService {
   constructor(private http: HttpClient) { }
 
   submitFeedback(fbEntry: Feedback): Observable<string> {
-    const entry = new HttpParams()
-      .set('form-name', 'feebackForm')
-      .append('firstName', fbEntry.firstName)
-      .append('lastName', fbEntry.lastName)
-      .append('email', fbEntry.email)
-      .append('type', fbEntry.type)
-      .append('description', fbEntry.description)
-      .append('rating', fbEntry.rating.toString());
+    const entry = new HttpParams({ fromObject: {
+      'form-name': 'feebackForm',
+      'firstName': fbEntry.firstName,
+      'lastName': fbEntry.lastName,
+      'email': fbEntry.email,
+      'type': fbEntry.type,
+      'description': fbEntry.description,
+      'rating': fbEntry.rating.toString(),
+    }});
 
     return this.submitEntry(entry);
   }
